@@ -68,7 +68,7 @@ public class RedisDemoApplication implements ApplicationRunner {
                 })
                 .subscribe(b -> log.info("Boolean: {}", b),
                         e -> log.error("Exception {}", e.getMessage()),
-                        () -> cdl.countDown());
+                        cdl::countDown);
         log.info("Waiting");
         cdl.await();
     }

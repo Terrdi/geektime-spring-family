@@ -32,6 +32,7 @@ public class CoffeeService {
     public void reloadCoffee() {
     }
 
+    @Cacheable
     public Optional<Coffee> findOneCoffee(String name) {
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher("name", exact().ignoreCase());

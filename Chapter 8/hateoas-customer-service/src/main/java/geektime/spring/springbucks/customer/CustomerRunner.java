@@ -27,6 +27,7 @@ import java.util.Collections;
 @Slf4j
 public class CustomerRunner implements ApplicationRunner {
     private static final URI ROOT_URI = URI.create("http://localhost:8080/");
+
     @Autowired
     private RestTemplate restTemplate;
 

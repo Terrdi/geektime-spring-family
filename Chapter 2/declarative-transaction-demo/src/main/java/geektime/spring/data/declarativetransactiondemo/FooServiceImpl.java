@@ -10,6 +10,9 @@ public class FooServiceImpl implements FooService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private FooService fooService;
+
     @Override
     @Transactional
     public void insertRecord() {
@@ -25,6 +28,6 @@ public class FooServiceImpl implements FooService {
 
     @Override
     public void invokeInsertThenRollback() throws RollbackException {
-        insertThenRollback();
+        fooService.insertThenRollback();
     }
 }

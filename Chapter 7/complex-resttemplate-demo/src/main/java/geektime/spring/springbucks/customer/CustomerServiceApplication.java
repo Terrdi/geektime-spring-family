@@ -21,8 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.print.attribute.standard.Media;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
@@ -52,7 +50,7 @@ public class CustomerServiceApplication implements ApplicationRunner {
 				.fromUriString("http://localhost:8080/coffee/?name={name}")
 				.build("mocha");
 		RequestEntity<Void> req = RequestEntity.get(uri)
-				.accept(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_JSON_UTF8)
 				.build();
 		ResponseEntity<String> resp = restTemplate.exchange(req, String.class);
 		log.info("Response Status: {}, Response Headers: {}", resp.getStatusCode(), resp.getHeaders().toString());

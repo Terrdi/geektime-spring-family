@@ -2,7 +2,9 @@ package geektime.spring.data.reactive.mongodbdemo;
 
 import geektime.spring.data.reactive.mongodbdemo.converter.MoneyReadConverter;
 import geektime.spring.data.reactive.mongodbdemo.converter.MoneyWriteConverter;
+import geektime.spring.data.reactive.mongodbdemo.model.BigTest;
 import geektime.spring.data.reactive.mongodbdemo.model.Coffee;
+import geektime.spring.data.reactive.mongodbdemo.model.SmallTest;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
@@ -32,6 +34,8 @@ public class MongodbDemoApplication implements ApplicationRunner {
 	private ReactiveMongoTemplate mongoTemplate;
 	private CountDownLatch cdl = new CountDownLatch(2);
 
+//	private SmallTest smallTest;
+
 	public static void main(String[] args) {
 		SpringApplication.run(MongodbDemoApplication.class, args);
 	}
@@ -46,6 +50,9 @@ public class MongodbDemoApplication implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 //		startFromInsertion(() -> log.info("Runnable"));
+//		smallTest = new SmallTest();
+//		smallTest.setName("ddd");
+//		smallTest.setValue("aaa");
 		startFromInsertion(() -> {
 			log.info("Runnable");
 			decreaseHighPrice();
@@ -95,6 +102,15 @@ public class MongodbDemoApplication implements ApplicationRunner {
 				.createTime(new Date())
 				.updateTime(new Date())
 				.build();
+
+		SmallTest smallTest = new SmallTest();
+		smallTest.setName("brbr");
+		smallTest.setValue("dede");
+		BigTest bigTest = new BigTest();
+		bigTest.setPort(123);
+		bigTest.setTest("i'm your father");
+		bigTest.setSmall(smallTest);
+		mongoTemplate.save(bigTest).subscribe();
 
 		return Arrays.asList(espresso, latte);
 	}

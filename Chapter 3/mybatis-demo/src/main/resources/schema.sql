@@ -1,3 +1,4 @@
+drop table t_coffee if exists ;
 create table t_coffee (
     id bigint not null auto_increment,
     name varchar(255),

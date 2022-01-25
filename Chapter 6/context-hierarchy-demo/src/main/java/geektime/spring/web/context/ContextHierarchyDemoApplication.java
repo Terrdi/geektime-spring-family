@@ -25,13 +25,16 @@ public class ContextHierarchyDemoApplication implements ApplicationRunner {
 				new String[] {"applicationContext.xml"}, fooContext);
 		TestBean bean = fooContext.getBean("testBeanX", TestBean.class);
 		bean.hello();
+		log.info("testBeanX is {}", bean.getClass().getName());
 
 		log.info("=============");
 
 		bean = barContext.getBean("testBeanX", TestBean.class);
 		bean.hello();
+		log.info("testBeanX is {}", bean.getClass().getName());
 
 		bean = barContext.getBean("testBeanY", TestBean.class);
 		bean.hello();
+		log.info("testBeanY is {}", bean.getClass().getName());
 	}
 }

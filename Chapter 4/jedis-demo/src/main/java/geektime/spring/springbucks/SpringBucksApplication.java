@@ -53,6 +53,9 @@ public class SpringBucksApplication implements ApplicationRunner {
 
 		try (Jedis jedis = jedisPool.getResource()) {
 			coffeeService.findAllCoffee().forEach(c -> {
+				log.info("hset {} {} {}", "springbucks-menu",
+						c.getName(),
+						Long.toString(c.getPrice().getAmountMinorLong()));
 				jedis.hset("springbucks-menu",
 						c.getName(),
 						Long.toString(c.getPrice().getAmountMinorLong()));

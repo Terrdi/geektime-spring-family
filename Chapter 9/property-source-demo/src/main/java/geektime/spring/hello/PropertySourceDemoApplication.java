@@ -7,6 +7,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+//@PropertySource("yapf.properties")
 @SpringBootApplication
 @Slf4j
 public class PropertySourceDemoApplication implements ApplicationRunner {

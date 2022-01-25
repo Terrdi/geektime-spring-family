@@ -47,6 +47,7 @@ public class MongoRepositoryDemoApplication implements CommandLineRunner {
 				.createTime(new Date())
 				.updateTime(new Date()).build();
 
+		Arrays.asList(espresso, latte).forEach(c -> log.info("Before Save Coffee {}", c));
 		coffeeRepository.insert(Arrays.asList(espresso, latte));
 		coffeeRepository.findAll(Sort.by("name"))
 				.forEach(c -> log.info("Saved Coffee {}", c));

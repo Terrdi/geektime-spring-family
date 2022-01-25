@@ -18,6 +18,7 @@ public class YapfEnvironmentPostProcessor implements EnvironmentPostProcessor {
         MutablePropertySources propertySources = environment.getPropertySources();
         Resource resource = new ClassPathResource("yapf.properties");
         try {
+            log.info("加载配置文件");
             PropertySource ps = loader.load("YetAnotherPropertiesFile", resource)
                     .get(0);
             propertySources.addFirst(ps);

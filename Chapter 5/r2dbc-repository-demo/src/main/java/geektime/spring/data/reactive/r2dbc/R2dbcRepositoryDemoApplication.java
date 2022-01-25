@@ -19,6 +19,7 @@ import org.springframework.data.r2dbc.dialect.Dialect;
 import org.springframework.data.r2dbc.function.convert.R2dbcCustomConversions;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
@@ -60,11 +61,15 @@ public class R2dbcRepositoryDemoApplication extends AbstractR2dbcConfiguration
 		repository.findAllById(Flux.just(1L, 2L))
 				.map(c -> c.getName() + "-" + c.getPrice().toString())
 				.doFinally(s -> cdl.countDown())
-				.subscribe(c -> log.info("Find {}", c));
+				.subscribeOn(Schedulers.single())
+				.subscribe(c -> log.info("id Find {}", c));
 
 		repository.findByName("mocha")
+				.publishOn(Schedulers.single())
+				.doOnEach(c -> log.info("test {}", c))
 				.doFinally(s -> cdl.countDown())
-				.subscribe(c -> log.info("Find {}", c));
+				.subscribeOn(Schedulers.single())
+				.subscribe(c -> log.info("name Find {}", c));
 
 		cdl.await();
 	}

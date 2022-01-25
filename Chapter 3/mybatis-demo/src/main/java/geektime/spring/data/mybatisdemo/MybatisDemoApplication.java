@@ -32,11 +32,17 @@ public class MybatisDemoApplication implements ApplicationRunner {
 
 		c = Coffee.builder().name("latte")
 				.price(Money.of(CurrencyUnit.of("CNY"), 25.0)).build();
+		log.info("Before Save c.id = {}", c.getId());
 		count = coffeeMapper.save(c);
 		log.info("Save {} Coffee: {}", count, c);
+		log.info("After Save c.id = {}", c.getId());
 
 		c = coffeeMapper.findById(c.getId());
 		log.info("Find Coffee: {}", c);
+
+		coffeeMapper.listAll().forEach(coffee -> {
+			log.info("Find Coffe: {}", coffee);
+		});
 	}
 }
 
